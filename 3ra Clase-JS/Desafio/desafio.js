@@ -3,7 +3,7 @@ let num2;
 let salir = "";
 
 for (let i = 0; i < 3; i++) {
-    while (salir != "S") {
+    while (salir != "S" && salir != "s") {
 
         num1 = parseInt(prompt("Ingrese un numero"));
         num2 = parseInt(prompt("Ingrese un numero"));
