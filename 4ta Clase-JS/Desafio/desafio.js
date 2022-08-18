@@ -1,6 +1,6 @@
-let product = prompt("Input a name of a product")
-let price_product = parseInt(prompt("Input the price of " + product))
-let num_product = parseInt(prompt("Input the amount of " + product + "s you want to buy"))
+let name_product = prompt("Input the name of the product")
+let price_product = parseFloat(prompt("Input the unit price of " + name_product))
+let num_product = parseInt(prompt("Input the amount of " + name_product + "s you want to purchase"))
 
 function total_cost (price_product, num_product){
     let cost = price_product * num_product
@@ -15,15 +15,18 @@ function promo_code (promo_code_Q){
         if (code == "AAA"){
             let promo_applied = total_cost(price_product, num_product) * 0.30
             let total = total_cost(price_product, num_product) - promo_applied
+            console.log("Your total cost with the promo code is: " + total)
             return total
         } else {
             alert("Invalid promo code!")
+            console.log("Your total cost is: " + total_cost(price_product, num_product))
             return total_cost(price_product, num_product)
         }
     } else {
+        console.log("Your total cost is: " + total_cost(price_product, num_product))
         return total_cost(price_product, num_product)
     }
 }
 
-console.log("Your total cost is: " + total_cost(price_product, num_product))
-console.log("Your total cost with the promo code is: " + promo_code(promo_code_Q))
+total_cost(price_product, num_product)
+promo_code(promo_code_Q)
