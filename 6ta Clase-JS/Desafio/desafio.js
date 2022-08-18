@@ -46,14 +46,17 @@ function promo_code (promo_code_Q){
         if (code == "AAA"){
             let promo_applied = total_cost(price_product, num_product) * 0.30
             let total = total_cost(price_product, num_product) - promo_applied
+            console.log("<----------------------->")
             console.log("Your total cost with the promo code is: " + total)
             return total
         } else {
             alert("Invalid promo code!")
+            console.log("<----------------------->")
             console.log("Your total cost is: " + total_cost(price_product, num_product))
             return total_cost(price_product, num_product)
         }
     } else {
+        console.log("<----------------------->")
         console.log("Your total cost is: " + total_cost(price_product, num_product))
         return total_cost(price_product, num_product)
     }
@@ -93,6 +96,7 @@ for (let i = 1; i <= amount_cards; i++) {
 }
 
 for (let card of cc_cards) { //Lleva ese orden por el orden en que esta en el UI
+    console.log("<----------------------->")
     console.log("Card Number:", cc_number)
     console.log("Card Holder Name:", cc_name)
     console.log("Exp:", cc_exp)
