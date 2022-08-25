@@ -1,9 +1,10 @@
-let name_product
-let price_product
-let num_product
+//variables del producto
+let name_product //nombre
+let price_product // precio
+let num_product //cantidad
 
 //1.1/3 Empieza desafío complementario clase 6
-class products {
+class products { //constructor de un objeto por producto
     constructor(name_product, price_product, num_product){
         this.name_product = name_product
         this.price_product = price_product
@@ -11,8 +12,8 @@ class products {
     }
 }
 
-let products_array = []
-let amount_purchase = parseInt(prompt("Please enter the number of products you want to input"))
+let products_array = [] //array para meter los objetos
+let amount_purchase = parseInt(prompt("Please enter the number of products you want to input")) //input de la cantidad de productos que se van a agregar al carrito
 
 for (let i = 1; i <= amount_purchase; i++) {
     name_product = prompt("Input the name of product " + i)
@@ -22,7 +23,9 @@ for (let i = 1; i <= amount_purchase; i++) {
     let new_product_array = new products(name_product, price_product, num_product)
     products_array.push(new_product_array)
     
-}  let cost = 0
+}
+
+let cost = 0
 
 for (let product of products_array) {
     console.log("<----------------------->")
@@ -31,7 +34,7 @@ for (let product of products_array) {
     console.log("Price per unit:", product.price_product)
     console.log("Total price for", product.name_product, "is:", (product.price_product*product.num_product))
 	
-    cost = (product.price_product*product.num_product) + cost  
+    cost = (product.price_product*product.num_product) + cost
 }
 
 //1.2/3 Finaliza desafío complementario clase 6
