@@ -32,21 +32,6 @@ let products_on_cart = [ //array con objetos/productos en el cart
 ]
 console.log("Products in cart:", products_on_cart)
 
-// function add_products_site(product){//productos nuevos a agregar por el cliente
-//     //input de la cantidad de productos que se van a agregar a la pagina
-//     let new_products = parseInt(prompt("Please enter the number of products you want to input")) 
-
-//     for (let i = 1; i <= new_products; i++) {
-//         product.name_product = prompt("Input the name of product " + i)
-//         product.price_product = parseFloat(prompt("Input the unit price of " + product.name_product))
-//         product.stock_product = parseInt(prompt("Input the stock of the product"))
-        
-//         let new_product_array = new existing_products_array (product.name_product, product.price_product, product.stock_product)
-//         existing_products_array.push(new_product_array)
-        
-//     }
-//
-
 //Nombre del producto a comprar
 let choose_product = prompt("Please enter the name of the product you want to search")
 
@@ -113,7 +98,7 @@ let output_filter_added_products = products_on_cart.filter(filter_added_products
 console.log("Filter:", output_filter_added_products)
 
 function sum_per_product(acu, product){
-    acu = acu + output_filter_added_products.amount_purchase
+    acu = acu + product.amount_purchase
     return acu
 }
 
@@ -138,3 +123,22 @@ console.log("Sum per product:",output_filter_added_products)
 // let output_remove_from_cart = products_array.reduce(remove_from_cart, 0)
 // console.log("Add to cart:", output_remove_from_cart)
 
+
+
+
+
+
+// function add_products_site(product){//productos nuevos a agregar por el cliente
+//     //input de la cantidad de productos que se van a agregar a la pagina
+//     let new_products = parseInt(prompt("Please enter the number of products you want to input")) 
+
+//     for (let i = 1; i <= new_products; i++) {
+//         product.name_product = prompt("Input the name of product " + i)
+//         product.price_product = parseFloat(prompt("Input the unit price of " + product.name_product))
+//         product.stock_product = parseInt(prompt("Input the stock of the product"))
+        
+//         let new_product_array = new existing_products_array (product.name_product, product.price_product, product.stock_product)
+//         existing_products_array.push(new_product_array)
+        
+//     }
+//
