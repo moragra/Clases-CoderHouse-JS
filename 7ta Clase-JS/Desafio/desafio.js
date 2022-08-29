@@ -1,144 +1,148 @@
+let products = [ //array con todos los productos de la pagina
+    {name: "b", price: 50, stock: 5, count:0},
+    {name: "Abs Rug", price: 30, stock: 3, count:0},
+    {name: "Arch Rug", price: 55, stock: 2, count:0},
+    {name: "Trio Color Rug", price: 50, stock: 7, count:0},
+    {name: "unclarito Rug", price: 120, stock: 3, count:0},
+    {name: "Orange Palette Rug", price: 70, stock: 2, count:0},
+    {name: "Pink unclarito Rug", price: 80, stock: 6, count:0},
+    {name: "Frame unclarito Rug", price: 80, stock: 5, count:0},
+    {name: "Black dots unclarito Rug", price: 80, stock: 7, count:0},
+]
 
-//falta crear clase con constructor para poder hacer push si se crean nuevos productos -> opcion solo para el lado del cliente/dueño de pagina
+console.log("List of products:" , products)
 
-let existing_products_array = [ //array con todos los productos de la pagina
-    {name_product: "b", price_product: 50, stock_product: 5, amount_purchase:0},
-    {name_product: "Abs Rug", price_product: 30, stock_product: 3, amount_purchase:0},
-    {name_product: "Arch Rug", price_product: 55, stock_product: 2, amount_purchase:0},
-    {name_product: "Trio Color Rug", price_product: 50, stock_product: 7, amount_purchase:0},
-    {name_product: "unclarito Rug", price_product: 120, stock_product: 3, amount_purchase:0},
-    {name_product: "Orange Palette Rug", price_product: 70, stock_product: 2, amount_purchase:0},
-    {name_product: "Pink unclarito Rug", price_product: 80, stock_product: 6, amount_purchase:0},
-    {name_product: "Frame unclarito Rug", price_product: 80, stock_product: 5, amount_purchase:0},
-    {name_product: "Black dots unclarito Rug", price_product: 80, stock_product: 7, amount_purchase:0},
-] 
-
-console.log("Products available:" , existing_products_array)
-class cart { //constructor de un objeto por producto agregado
-    constructor(name_product, price_product, stock_product, amount_purchase){
-        this.name_product = name_product
-        this.price_product = price_product
-        this.stock_product = stock_product
-        this.amount_purchase = amount_purchase
-    }
+//constructor de un objeto por producto
+function item (name, price, stock, count){
+    this.name = name
+    this.price = price
+    this.stock = stock
+    this.count = count
 }
 
-let products_on_cart = [ //array con objetos/productos en el cart
-    {name_product: "b", price_product: 50, stock_product: 5, amount_purchase:1},
-    {name_product: "b", price_product: 50, stock_product: 5, amount_purchase:1},
-    {name_product: "Abs Rug", price_product: 30, stock_product: 3, amount_purchase:2},
-    {name_product: "Arch Rug", price_product: 55, stock_product: 2, amount_purchase:1},
-    {name_product: "Arch Rug", price_product: 55, stock_product: 2, amount_purchase:1}
-]
-console.log("Products in cart:", products_on_cart)
+let cart = [ //array con objetos/productos en el cart
+{name: "b", price: 50, stock: 5, count:1},
+{name: "Abs Rug", price: 30, stock: 3, count:2},
+{name: "Arch Rug", price: 55, stock: 2, count:1}
+] 
+console.log("List of products in cart:" , cart)
 
-//Nombre del producto a comprar
 let choose_product = prompt("Please enter the name of the product you want to search")
 
 //Encuentra el producto a comprar dentro del arreglo con la lista de objetos/productos ya creados
 function find_products (product){
-    return product.name_product == choose_product
+    if (product.name == choose_product) {
+        alert("Product found!", choose_product) //imprime objeto encontrado con sus propiedades 
+        return product.name == choose_product
+    } 
+    // else {
+    //     alert("Product not found!", choose_product) 
+    // }
 }
 
-//Output del producto encontrado
-// let output_find_products = new Object();
-let found_products = existing_products_array.find(find_products)
-console.log("Product found!", found_products) //imprime objeto encontrado con sus propiedades 
+let found_products = products.find(find_products) //imprime objeto encontrado con sus propiedades 
+console.log(found_products)
 
-//variables de producto agregado al carrito
-let name_product
-let price_product
-let stock_product
-let amount_purchase
+// Add to cart
 
-//guardo en la variable el ultimo property del objeto
-let lastKey = Object.keys(found_products).pop()
-// console.log(lastKey)
-
-//guardo en variable el valor del ultimo property del objeto
-let lastValue = parseInt(Object.values(found_products).splice(-1))
-console.log("Amount on cart:" , lastValue, "of", found_products.name_product)
-
-// Revisar si hay stock del ultimo producto preguntado -> volver funcion (no se como usar el valor de lastValue y lastKey dentro de una funcion)
-if (found_products.stock_product > 0) {
-    console.log("We have stock!")
-
-    //Agrega al cart el producto buscado
-    let add_to_cart_Q = prompt("Do you want to add " + found_products.name_product + " to the cart? Y/N")
-    if (add_to_cart_Q == "Y" || add_to_cart_Q == "y") {
-        lastValue = lastValue + 1
-        found_products.amount_purchase = lastValue
-        alert("Se agrego 1 item de " + found_products.name_product + " al carrito")
-        found_products = new cart(name_product, price_product, stock_product, amount_purchase)
-        products_on_cart.push(found_products)
-        console.log(products_on_cart)
-    } else if (add_to_cart_Q == "N" || add_to_cart_Q == "n") {
-        let different_product = prompt("Where you looking for a different product? Y/N")
-        if (different_product == "Y" || different_product == "y"){
-            found_products = existing_products_array.find(find_products)
-            console.log("Product found!", found_products)
-        } else {
-            alert("See you soon! Have a great day!")
-        }
+function add_to_cart(name, stock, count){
+    let add_to_cart_Q = prompt("Do you want to add " + found_products.name + " to the cart? Y/N")
+    if(add_to_cart_Q == "Y" || add_to_cart_Q == "y"){
+        found_products.stock --
+        found_products.count ++
+        cart.push(found_products)
+        alert("Se agrego 1 item de " + found_products.name + " al carrito")
     } else {
         alert("See you soon! Have a great day!")
     }
-} else {
-    alert("We are out of stock!")
 }
 
-//Filtrar cuales de los productos ya en carrito son iguales para agregarlo en si mismo
-for (product of products_on_cart) {
-    function filter_added_products(product){
-        return product.name_product == choose_product
+add_to_cart()
+console.log(cart)
+
+function sort_cart(a, b){
+    return a.price - b.price
+}
+
+let output_sort_cart = cart.sort(sort_cart)
+
+let final_cart = {}
+
+cart.forEach(
+    function set_count (product) {
+        if (final_cart[product.name]) {
+            final_cart[product.name].price = final_cart[product.name].price + product.price //no he logrado que me sume esto
+            final_cart[product.name].stock = final_cart[product.name].stock - 1
+            final_cart[product.name].count = final_cart[product.name].count + 1
+        } else {
+            final_cart[product.name] = product
+        }
     }
-}
+)
 
-let output_filter_added_products = products_on_cart.filter(filter_added_products)
-console.log("Filter:", output_filter_added_products)
+let value_final_cart = Object.values(final_cart)
+console.log(value_final_cart)
 
-function sum_per_product(acu, product){
-    acu = acu + product.amount_purchase
-    return acu
-}
+// let promo_code_Q = prompt("Have a promo code? Y/N")
 
-let output_sum_per_product = products_on_cart.reduce(sum_per_product)
-console.log("Sum per product:",output_filter_added_products)
-
-// function total_cost_per_product(acu, product){
-//     acu = acu + (product.price_product * product.num_product)
-//     return acu
-// }
-
-// let output_total_cost = products_array.reduce(total_cost_per_product, 0)
-// console.log("Total cost for", output_total_cost)
-
-
-
-// function remove_from_cart (acu, product){
-//     acu = acu + (product.num_product - 1)
-//     return acu
-// }
-
-// let output_remove_from_cart = products_array.reduce(remove_from_cart, 0)
-// console.log("Add to cart:", output_remove_from_cart)
-
-
-
-
-
-
-// function add_products_site(product){//productos nuevos a agregar por el cliente
-//     //input de la cantidad de productos que se van a agregar a la pagina
-//     let new_products = parseInt(prompt("Please enter the number of products you want to input")) 
-
-//     for (let i = 1; i <= new_products; i++) {
-//         product.name_product = prompt("Input the name of product " + i)
-//         product.price_product = parseFloat(prompt("Input the unit price of " + product.name_product))
-//         product.stock_product = parseInt(prompt("Input the stock of the product"))
-        
-//         let new_product_array = new existing_products_array (product.name_product, product.price_product, product.stock_product)
-//         existing_products_array.push(new_product_array)
-        
+// function promo_code (cost, promo_code_Q){
+//     if (promo_code_Q == "y" || promo_code_Q == "Y"){
+//         let code = prompt("Enter the promo code")
+//         if (code == "AAA" || code == "aaa"){
+//             let promo_applied = cost * 0.30
+//             let total = cost - promo_applied
+//             console.log("<----------------------->")
+//             console.log("Your total cost with the promo code is: " + total)
+//             return total
+//         } else {
+//             alert("Invalid promo code!")
+//             console.log("<----------------------->")
+//             console.log("Your total cost is: " + cost)
+//             return cost
+//         }
+//     } else {
+//         console.log("<----------------------->")
+//         console.log("Your total cost is: " + cost)
+//         return cost
 //     }
-//
+// }
+
+// promo_code(cost, promo_code_Q)
+
+// //1.3/3 Empieza desafío complementario clase 6
+
+// let cc_name 
+// let cc_number
+// let cc_ccv 
+// let cc_exp
+// let amount_cards = parseInt(prompt("Enter the amount of cards to add to wallet"))
+
+// class cc_card {
+//     constructor(cc_name, cc_number, cc_ccv, cc_exp){
+//         this.cc_name = cc_name
+//         this.cc_number = cc_number
+//         this.cc_ccv = cc_ccv
+//         this.cc_exp = cc_exp
+//     }
+// }
+
+// let cc_cards = []
+
+// for (let i = 1; i <= amount_cards; i++) {
+//     cc_name = prompt("Enter the card holder name")
+//     cc_number = parseInt(prompt("Enter the card number"))
+//     cc_ccv = parseInt(prompt("Enter the CCV"))
+//     cc_exp = parseInt(prompt("Enter the expiration date"))
+
+//     let card = new cc_card (cc_name, cc_number, cc_ccv, cc_exp)
+//     cc_cards.push(card)
+
+// }
+
+// for (let card of cc_cards) { //Lleva ese orden por el orden en que esta en el UI
+//     console.log("<----------------------->")
+//     console.log("Card Number:", cc_number)
+//     console.log("Card Holder Name:", cc_name)
+//     console.log("Exp:", cc_exp)
+//     console.log("CCV:", cc_exp)
+// }

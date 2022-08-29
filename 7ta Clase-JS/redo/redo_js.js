@@ -22,9 +22,7 @@ function item (name, price, stock, count){
 
 let cart = [ //array con objetos/productos en el cart
 {name: "b", price: 50, stock: 5, count:1},
-{name: "b", price: 50, stock: 5, count:1},
 {name: "Abs Rug", price: 30, stock: 3, count:2},
-{name: "Arch Rug", price: 55, stock: 2, count:1},
 {name: "Arch Rug", price: 55, stock: 2, count:1}
 ] 
 console.log("List of products in cart:" , cart)
@@ -33,63 +31,76 @@ let choose_product = prompt("Please enter the name of the product you want to se
 
 //Encuentra el producto a comprar dentro del arreglo con la lista de objetos/productos ya creados
 function find_products (product){
-    return product.name == choose_product
+    if (product.name == choose_product) {
+        alert("Product found!", choose_product) //imprime objeto encontrado con sus propiedades 
+        return product.name == choose_product
+    } 
+    // else {
+    //     alert("Product not found!", choose_product) 
+    // }
 }
 
-//Output del producto encontrado
-let found_products = products.find(find_products)
-console.log("Product found!", found_products) //imprime objeto encontrado con sus propiedades 
-
-let obj = {}
+let found_products = products.find(find_products) //imprime objeto encontrado con sus propiedades 
+console.log(found_products)
 
 // Add to cart
-// obj.add_to_cart = 
 
-function add_to_cart(name, price, stock, count){
-    for (let product of cart) {
-        let add_to_cart_Q = prompt("Do you want to add " + cart[product].name + " to the cart? Y/N")
-        if(add_to_cart_Q == "Y" || add_to_cart_Q == "y"){
-            if(cart[product].name == name){
-                cart[product].count ++
-                cart[product].stock --
-                console.log("Se agrego 1 item de " + cart[product].name + " al carrito")
-                return
-            }
+function add_to_cart(name, stock, count){
+    let add_to_cart_Q = prompt("Do you want to add " + found_products.name + " to the cart? Y/N")
+    if(add_to_cart_Q == "Y" || add_to_cart_Q == "y"){
+        found_products.stock --
+        found_products.count ++
+        cart.push(found_products)
+        alert("Se agrego 1 item de " + found_products.name + " al carrito")
+    } else {
+        alert("See you soon! Have a great day!")
+    }
+}
+
+add_to_cart()
+console.log(cart)
+
+function sort_cart(a, b){
+    return a.price - b.price
+}
+
+let output_sort_cart = cart.sort(sort_cart)
+
+let final_cart = {}
+
+cart.forEach(
+    function set_count (product) {
+        if (final_cart[product.name]) {
+            final_cart[product.name].price = final_cart[product.name].price + product.price
+            final_cart[product.name].stock = final_cart[product.name].stock - 1
+            final_cart[product.name].count = final_cart[product.name].count + 1
         } else {
-            alert("See you soon! Have a great day!")
+            final_cart[product.name] = product
         }
     }
-    let product = new(name, price, stock, count)
-    cart.push(product)
-}
+)
 
-obj.set_count = function(name, count){
-    for (let product of cart) {
-        if(cart[product].name == name){
-            cart[product].count = count
-            break
-        }
-    }
-}
+let value_final_cart = Object.values(final_cart)
+console.log(value_final_cart)
 
-obj.clear_cart = function(){
-    cart = []
-}
+// function clear_cart(){
+//     cart = []
+// }
 
-obj.total_count = function(acu){
-    acu = 0
-    for (let product of cart) {
-        acu = acu + cart[product].count
-    }
-    return acu
-}
+// obj.total_count = function(acu){
+//     acu = 0
+//     for (let product of cart) {
+//         acu = acu + cart[product].count
+//     }
+//     return acu
+// }
 
-obj.total_cart = function(acu){
-    for (let product of cart) {
-        acu = cart[product].price * cart[product].count
-    }
-    return acu.toFixed(2)
-}
+// obj.total_cart = function(acu){
+//     for (let product of cart) {
+//         acu = cart[product].price * cart[product].count
+//     }
+//     return acu.toFixed(2)
+// }
 
 // let promo_code_Q = prompt("Have a promo code? Y/N")
 
