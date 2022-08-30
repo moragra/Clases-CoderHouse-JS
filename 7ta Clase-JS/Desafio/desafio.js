@@ -22,7 +22,7 @@ function item (name, price, stock, count){
 
 let cart = [ //array con objetos/productos en el cart
 {name: "b", price: 50, stock: 5, count:1},
-{name: "Abs Rug", price: 30, stock: 3, count:2},
+{name: "Abs Rug", price: 30, stock: 3, count:1},
 {name: "Arch Rug", price: 55, stock: 2, count:1}
 ] 
 console.log("List of products in cart:" , cart)
@@ -41,15 +41,14 @@ function find_products (product){
 }
 
 let found_products = products.find(find_products) //imprime objeto encontrado con sus propiedades 
-console.log(found_products)
 
 // Add to cart
 
 function add_to_cart(name, stock, count){
     let add_to_cart_Q = prompt("Do you want to add " + found_products.name + " to the cart? Y/N")
     if(add_to_cart_Q == "Y" || add_to_cart_Q == "y"){
-        found_products.stock --
-        found_products.count ++
+        // found_products.stock --
+        // found_products.count ++
         cart.push(found_products)
         alert("Se agrego 1 item de " + found_products.name + " al carrito")
     } else {
@@ -58,15 +57,8 @@ function add_to_cart(name, stock, count){
 }
 
 add_to_cart()
-console.log(cart)
 
-function sort_cart(a, b){
-    return a.price - b.price
-}
-
-let output_sort_cart = cart.sort(sort_cart)
-
-let final_cart = {}
+let final_cart = []
 
 cart.forEach(
     function set_count (product) {
@@ -81,35 +73,50 @@ cart.forEach(
 )
 
 let value_final_cart = Object.values(final_cart)
-console.log(value_final_cart)
 
-// let promo_code_Q = prompt("Have a promo code? Y/N")
 
-// function promo_code (cost, promo_code_Q){
-//     if (promo_code_Q == "y" || promo_code_Q == "Y"){
-//         let code = prompt("Enter the promo code")
-//         if (code == "AAA" || code == "aaa"){
-//             let promo_applied = cost * 0.30
-//             let total = cost - promo_applied
-//             console.log("<----------------------->")
-//             console.log("Your total cost with the promo code is: " + total)
-//             return total
-//         } else {
-//             alert("Invalid promo code!")
-//             console.log("<----------------------->")
-//             console.log("Your total cost is: " + cost)
-//             return cost
-//         }
-//     } else {
-//         console.log("<----------------------->")
-//         console.log("Your total cost is: " + cost)
-//         return cost
-//     }
-// }
+function sort_cart(a, b){
+    return a.price - b.price
+}
 
-// promo_code(cost, promo_code_Q)
+let output_sort_cart = final_cart.sort(sort_cart)
 
-// //1.3/3 Empieza desafío complementario clase 6
+let total_cart = 0
+
+value_final_cart.forEach(
+    function(product){
+        total_cart = product.price + total_cart
+        return total_cart
+    }
+)
+
+console.log("The total to pay is: " + total_cart)
+alert("The total to pay is: " + total_cart)
+
+function promo_code (){
+    let promo_code_Q = prompt("Have a promo code? Y/N")
+    if (promo_code_Q == "y" || promo_code_Q == "Y"){
+        let code = prompt("Enter the promo code")
+        if (code == "AAA" || code == "aaa"){
+            let promo_applied = total_cart * 0.30
+            let total = total_cart - promo_applied
+            console.log("<----------------------->")
+            console.log("Your total cost with the promo code is: " + total)
+            return total
+        } else {
+            alert("Invalid promo code!")
+            console.log("<----------------------->")
+            console.log("Your total cost is: " + total_cart)
+            return total_cart
+        }
+    } else {
+        console.log("<----------------------->")
+        console.log("Your total cost is: " + total_cart)
+        return total_cart
+    }
+}
+
+promo_code()
 
 // let cc_name 
 // let cc_number
