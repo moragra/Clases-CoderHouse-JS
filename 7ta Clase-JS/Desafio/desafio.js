@@ -44,12 +44,16 @@ let found_products = products.find(find_products) //imprime objeto encontrado co
 
 // Add to cart
 
-function add_to_cart(name, stock, count){
+function add_to_cart(){
     let add_to_cart_Q = prompt("Do you want to add " + found_products.name + " to the cart? Y/N")
     if(add_to_cart_Q == "Y" || add_to_cart_Q == "y"){
-        // found_products.stock --
-        // found_products.count ++
         cart.push(found_products)
+        for (let p of products) {
+            if (found_products.name === p.name) {
+                p.stock--
+                p.count++
+            }
+        }
         alert("Se agrego 1 item de " + found_products.name + " al carrito")
     } else {
         alert("See you soon! Have a great day!")
@@ -58,61 +62,31 @@ function add_to_cart(name, stock, count){
 
 add_to_cart()
 
-let final_cart = []
+let final_cart = cart.reduce((acc, p) => acc + p.price, 0)
 
-cart.forEach(
-    function set_count (product) {
-        if (final_cart[product.name]) {
-            final_cart[product.name].price = final_cart[product.name].price + product.price //no he logrado que me sume esto
-            final_cart[product.name].stock = final_cart[product.name].stock - 1
-            final_cart[product.name].count = final_cart[product.name].count + 1
-        } else {
-            final_cart[product.name] = product
-        }
-    }
-)
-
-let value_final_cart = Object.values(final_cart)
-
-
-function sort_cart(a, b){
-    return a.price - b.price
-}
-
-let output_sort_cart = final_cart.sort(sort_cart)
-
-let total_cart = 0
-
-value_final_cart.forEach(
-    function(product){
-        total_cart = product.price + total_cart
-        return total_cart
-    }
-)
-
-console.log("The total to pay is: " + total_cart)
-alert("The total to pay is: " + total_cart)
+console.log("The total to pay is: " + final_cart)
+alert("The total to pay is: " + final_cart)
 
 function promo_code (){
     let promo_code_Q = prompt("Have a promo code? Y/N")
     if (promo_code_Q == "y" || promo_code_Q == "Y"){
         let code = prompt("Enter the promo code")
         if (code == "AAA" || code == "aaa"){
-            let promo_applied = total_cart * 0.30
-            let total = total_cart - promo_applied
+            let promo_applied = final_cart * 0.30
+            let total = final_cart - promo_applied
             console.log("<----------------------->")
             console.log("Your total cost with the promo code is: " + total)
             return total
         } else {
             alert("Invalid promo code!")
             console.log("<----------------------->")
-            console.log("Your total cost is: " + total_cart)
-            return total_cart
+            console.log("Your total cost is: " + final_cart)
+            return final_cart
         }
     } else {
         console.log("<----------------------->")
-        console.log("Your total cost is: " + total_cart)
-        return total_cart
+        console.log("Your total cost is: " + final_cart)
+        return final_cart
     }
 }
 
